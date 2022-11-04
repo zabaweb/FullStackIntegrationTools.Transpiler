@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>FullStackIntegrationTools.Transpiler</id>
+    <version>$version$</version>
+    <description>Seamlesly transpile C# DTOs nad controllers to typescript</description>
+    <authors>Rafal Karwat</authors>
+    <owners>Rafal Karwat</owners>
+    <license type="expression">MIT</license>
+    <developmentDependency>true</developmentDependency>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+  </metadata>
+  <files>
+    <file src="build\FullStackIntegrationTools.Transpiler.props" target="build" />
+    <file src="build\FullStackIntegrationTools.Transpiler.targets" target="build" />
+    <file src="bin\Debug\**\*.dll" target="tools" />
+    <file src="bin\Debug\**\*.exe" target="tools" />
+    <file src="bin\Debug\**\*.json" target="tools" />
+  </files>
+</package>
