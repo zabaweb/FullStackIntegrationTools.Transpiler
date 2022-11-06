@@ -12,6 +12,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="CommandLineParser" version="2.9.1" />
+      <dependency id="Microsoft.AspNetCore.Mvc.Core" version="2.2.5" />
     </dependencies>
   </metadata>
   <files>
