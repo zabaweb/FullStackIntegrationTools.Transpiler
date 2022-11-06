@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWebApi", "SimpleWebAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebApi", "MinimalWebApi\MinimalWebApi.csproj", "{9473722E-9139-4429-9FAF-5471A9D86E08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranspilerUnitTests", "TranspilerUnitTests\TranspilerUnitTests.csproj", "{D1988E55-80DA-4925-9FF7-A876A101EA81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranspilerUnitTests", "TranspilerUnitTests\TranspilerUnitTests.csproj", "{D1988E55-80DA-4925-9FF7-A876A101EA81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

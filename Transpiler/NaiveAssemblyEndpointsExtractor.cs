@@ -8,7 +8,7 @@ public class NaiveAssemblyEndpointsExtractor
 {
     public EndpointModel[] GetEndpoints(Assembly asm)
     {
-        var types = asm.GetTypes().Select(x => x.GetTypeInfo());
+        var types = asm.GetTypes();
         var controllers = types.Where(t => t.Name.EndsWith("Controller"));
         var methodMap = controllers.ToDictionary(x => x.Name ?? "", x => GetMethods(x));
         var result = methodMap.Select(ToControllerModel).ToArray();
@@ -16,9 +16,9 @@ public class NaiveAssemblyEndpointsExtractor
         return result;
     }
 
-    private MethodInfo[] GetMethods(TypeInfo t)
+    private MethodInfo[] GetMethods(Type t)
     {
-        var methodsAll = t.DeclaredMethods;
+        var methodsAll = t.GetMethods();
         var methods = methodsAll
             .Where(m => m.CustomAttributes.Any(x => IsHttpMethodAttribute(x)));
 
@@ -48,6 +48,7 @@ public class NaiveAssemblyEndpointsExtractor
     {
         Parameters = GetParameters(methodInfo),
         ReturnType = methodInfo.ReturnType,
+        MethodName = methodInfo.Name,
     };
 
     private EndpointModel ToControllerModel(KeyValuePair<string, MethodInfo[]> x) => new EndpointModel

@@ -2,6 +2,8 @@
 
 public class MethodModel
 {
+    public string MethodName { get; init; }
+
     public Type ReturnType { get; init; }
 
     public Type[] Parameters { get; init; }

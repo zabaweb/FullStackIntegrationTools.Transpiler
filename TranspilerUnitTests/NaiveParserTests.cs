@@ -41,16 +41,16 @@ public class NaiveParserTests
             new TypeModel{
                 FullName = "SimpleWebApi.WeatherForecast",
                 Properties = new Dictionary<string,PropertyModel> {
-                    { "TemperatureC", new PropertyModel { TypeFullName = typeof(int).FullNameSupress() } },
-                    { "Summary", new PropertyModel { TypeFullName = typeof(WeatherForecastSummary).FullNameSupress() } },
+                    { "TemperatureC", new PropertyModel { TypeFullName = typeof(int).FullNameSupress(), TypeCategory = TypeCategory.Class } },
+                    { "Summary", new PropertyModel { TypeFullName = typeof(WeatherForecastSummary).FullNameSupress(), TypeCategory = TypeCategory.Class } },
                 }
             },
             new TypeModel{
                 FullName = "SimpleWebApi.WeatherForecastSummary",
                 Properties = new Dictionary<string,PropertyModel> {
-                    { "OneProperty", new PropertyModel { TypeFullName = typeof(string).FullNameSupress() } },
-                    { "TwoProperty", new PropertyModel { TypeFullName = typeof(bool).FullNameSupress() } },
-                    { "ThreeProperty", new PropertyModel { TypeFullName = typeof(string).FullNameSupress(), ArrayNesting = 2 } },
+                    { "OneProperty", new PropertyModel { TypeFullName = typeof(string).FullNameSupress(), TypeCategory = TypeCategory.Class } },
+                    { "TwoProperty", new PropertyModel { TypeFullName = typeof(bool).FullNameSupress(), TypeCategory = TypeCategory.Class } },
+                    { "ThreeProperty", new PropertyModel { TypeFullName = typeof(string).FullNameSupress(), ArrayNesting = 2, TypeCategory = TypeCategory.Class } },
                 }
             }
         };

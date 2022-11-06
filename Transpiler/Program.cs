@@ -1,42 +1,24 @@
-﻿using System.Reflection;
-using System.Runtime.InteropServices;
-using CommandLine;
-using Transpiler;
+﻿using Transpiler;
+using Transpiler.Helpers;
+using Transpiler.Models;
 
-var cmd = CommandLine.Parser.Default
-    .ParseArguments<CommandLineOptions>(args)
-    .WithNotParsed(HandleParseError).Value;
+var config = ConfigProvider.FromCommandLineArgs(args);
 
-var resolver = new PathAssemblyResolver(new List<string>(Directory.GetFiles(RuntimeEnvironment.GetRuntimeDirectory(), "*.dll"))
-{
-    cmd.AssemblyPath,
-    "Microsoft.AspNetCore.Mvc.Core.dll"
-});
-
-var dir = new DirectoryInfo(".");
-
-using var metadataContext = new MetadataLoadContext(resolver);
-var assembly = metadataContext.LoadFromAssemblyPath(cmd.AssemblyPath);
-_ = metadataContext.LoadFromAssemblyPath("Microsoft.AspNetCore.Mvc.Core.dll");
-
-var ddd = metadataContext.GetAssemblies();
+var assembly = await AssemblyUtils.GetAssembly(config.AssemblyPath);
 
 var extractor = new NaiveAssemblyEndpointsExtractor();
-var endpointModels = extractor.GetEndpoints(assembly);
+var endpoints = extractor.GetEndpoints(assembly);
+
+Console.WriteLine($"{endpoints.Length} endpoints found: {string.Join(", ", endpoints.Select(ToLogString))}");
 
 var parser = new NaiveParser();
-var types = parser.Parse(endpointModels);
+var types = parser.Parse(endpoints);
+Console.WriteLine($"{types.Length} types found: {String.Join(", ", types.Select(x => x.FullName))}");
 
-var generator = new TsFilesGenerator();
+var generator = new TsFilesGenerator(config.OutputPath);
 await generator.Save(types);
 
-
-static void HandleParseError(IEnumerable<Error> errs)
+static string ToLogString(EndpointModel x)
 {
-    foreach(var e in errs)
-    {
-        Console.WriteLine(e.ToString());
-    }
-
-    throw new ArgumentException("Invalid command line arguments");
+    return $"{x.Name}[{string.Join(", ", x.Methods.Select(m => m.MethodName))}]";
 }

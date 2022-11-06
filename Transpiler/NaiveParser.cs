@@ -6,12 +6,6 @@ using Transpiler.Models;
 
 public class NaiveParser
 {
-    public static readonly Dictionary<string, Type> SimpleTypes = new Type[] {
-        typeof(string),
-        typeof(int),
-        typeof(bool),
-    }.ToDictionary(x => x.FullName ?? throw new Exception("2"), x => x);
-
     public TypeModel[] Parse(EndpointModel[] models)
     {
         var typesToParse = models
@@ -29,7 +23,7 @@ public class NaiveParser
                 continue;
             }
 
-            if(SimpleTypes.ContainsKey(type.FullNameSupress()))
+            if(Constants.SimpleTypes.ContainsKey(type.FullNameSupress()))
             {
                 continue;
             }
@@ -50,7 +44,8 @@ public class NaiveParser
                     new PropertyModel
                     {
                         ArrayNesting = nesting,
-                        TypeFullName = propertyType.FullNameSupress()
+                        TypeFullName = propertyType.FullNameSupress(),
+                        TypeCategory = propertyType.IsEnum ? TypeCategory.Enum : TypeCategory.Class
                     });
             }
 

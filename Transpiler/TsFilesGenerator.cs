@@ -4,13 +4,18 @@ using Transpiler.Models;
 namespace Transpiler;
 public class TsFilesGenerator
 {
+    public TsFilesGenerator(string root, bool minify = false)
+    {
+        _root = root;
+    }
 
-    const string root = "gen/";
+    private string _root;
+
     public Dictionary<string, string> GenerateFilesToSave(TypeModel[] types)
     {
         var uniquenessCheck = types.ToDictionary(t => t.FullName);
 
-        var classesToSave = types.ToDictionary(t => $"{root}/{t.FullName.Replace(".", "//")}.ts", t => ToTsClassFileContent(t));
+        var classesToSave = types.ToDictionary(t => $"{_root}/{t.FullName.Replace(".", "/")}.ts", t => ToTsClassFileContent(t));
 
         return classesToSave;
     }
@@ -21,6 +26,7 @@ public class TsFilesGenerator
 
         foreach(var (path, content) in classesToSave)
         {
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
             using var fileHandler = File.CreateText(path);
             await fileHandler.WriteAsync(content);
         }
@@ -31,19 +37,70 @@ public class TsFilesGenerator
     {
         var properties = new StringBuilder();
         var usings = new HashSet<string>();
-        var className = GetClassName(t.FullName);
+        var className = GetClassName(t.FullName).typeName;
 
-        foreach(var prop in t.Properties)
+        foreach(var (propertyName, model) in t.Properties)
         {
-            var propClassName = GetClassName(prop.Value.TypeFullName);
-            var arrayPostfix = GetArrayPostfix(prop.Value.ArrayNesting);
-            properties.Append($"{prop.Key}:{propClassName}{arrayPostfix};");
+            if(model.TypeCategory == TypeCategory.Enum)
+            {
+                continue;
+            }
+            var fileType = ToFileType(model);
+            if(fileType.isCustomType && fileType.typeFullName != t.FullName)
+            {
+                var usingValue = GetUsingLine(t.FullName, model.TypeFullName);
+                usings.Add(usingValue);
+            }
+
+            properties.AppendLine($"\t{propertyName}: {fileType.typeName};");
         }
 
-        var usingsText = String.Join(";", usings.ToArray());
         var propertiesText = properties.ToString();
 
-        return $"{usingsText}class {className}{{{propertiesText}}}";
+        var builder = new StringBuilder();
+
+        foreach(var usi in usings) { builder.AppendLine(usi); }
+        builder.AppendLine();
+        builder.AppendLine($"export default class {className}{{");
+        builder.Append(properties.ToString());
+        builder.AppendLine("}");
+
+        return builder.ToString();
+    }
+
+    private string GetUsingLine(string classFullName, string propertyFullName)
+    {
+        var classArr = classFullName.Split(".").SkipLast(1).ToArray();
+        var propArr = propertyFullName.Split(".");
+
+        var minLenght = classArr.Length > propArr.Length ? propArr.Length : classArr.Length;
+
+        var diffIndex = 0;
+
+        for(; diffIndex < minLenght; diffIndex++)
+        {
+            if(classArr[diffIndex] != propArr[diffIndex])
+            {
+                break;
+            }
+        }
+
+        classArr = classArr.Skip(diffIndex).ToArray();
+        propArr = propArr.Skip(diffIndex).ToArray();
+        var goToRoot = string.Join("", classArr.Select(x => "../"));
+        var pathToClass = string.Join("/", propArr);
+
+
+        return $"import {propArr.Last()} from \"{goToRoot}{pathToClass}\";";
+
+    }
+
+    private (string typeName, string typeFullName, bool isCustomType) ToFileType(PropertyModel model)
+    {
+        var baseTypeName = GetClassName(model.TypeFullName);
+        var arrayPostfix = GetArrayPostfix(model.ArrayNesting);
+
+        return ($"{baseTypeName.typeName}{arrayPostfix}", model.TypeFullName, baseTypeName.isCustomType);
     }
 
     private string GetArrayPostfix(uint arrayNesting) => arrayNesting switch
@@ -57,12 +114,14 @@ public class TsFilesGenerator
         _ => string.Concat(Enumerable.Repeat("[]", (int)arrayNesting))
     };
 
-    private static string GetClassName(string fullName) => fullName switch
+    private static (string typeName, bool isCustomType) GetClassName(string fullName)
     {
-        "System.String" => "string",
-        "System.Int16" => "number",
-        "System.Int32" => "number",
-        "System.Boolean" => "boolean",
-        _ => fullName.Split(".").Last()
-    };
+        if(Constants.SimpleTypes.ContainsKey(fullName))
+        {
+            var entry = Constants.SimpleTypes[fullName];
+            return (entry, false);
+        }
+
+        return (fullName.Split(".").Last(), true);
+    }
 }

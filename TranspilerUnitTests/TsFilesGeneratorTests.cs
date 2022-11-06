@@ -10,7 +10,7 @@ public class TsFilesGeneratorTests
     [Fact]
     public void GenerateFilesToSave_ForSimpleWebApi_ShouldGenerateExpectedClasses()
     {
-        var analyzer = new TsFilesGenerator();
+        var analyzer = new TsFilesGenerator("rootDir");
         var input = new TypeModel[] {
             new TypeModel{
                 FullName = "SimpleWebApi.WeatherForecast",
@@ -32,8 +32,8 @@ public class TsFilesGeneratorTests
 
         var expectedResult = new Dictionary<string, string>
         {
-            { "gen//SimpleWebApi//WeatherForecast.ts", "class WeatherForecast{TemperatureC:number;Summary:WeatherForecastSummary;}" },
-            { "gen//SimpleWebApi//WeatherForecastSummary.ts", "class WeatherForecastSummary{OneProperty:string;TwoProperty:boolean;ThreeProperty:string[][];}" }
+            { "rootDir//SimpleWebApi//WeatherForecast.ts", "import WeatherForecastSummary from \"./WeatherForecastSummary\";export default class WeatherForecast{TemperatureC:number;Summary:WeatherForecastSummary;}" },
+            { "rootDir//SimpleWebApi//WeatherForecastSummary.ts", "export default class WeatherForecastSummary{OneProperty:string;TwoProperty:boolean;ThreeProperty:string[][];}" }
         };
 
         result.Should().BeEquivalentTo(expectedResult);

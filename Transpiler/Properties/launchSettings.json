@@ -2,7 +2,7 @@
   "profiles": {
     "Transpiler": {
       "commandName": "Project",
-      "commandLineArgs": "--assembly C:\\Users\\Rafal\\Documents\\Projekty\\FullStackIntegrationTools\\SimpleWebApi\\bin\\Debug\\net6.0\\SimpleWebApi.dll"
+      "commandLineArgs": "--assembly C:\\Users\\Rafal\\Documents\\Projekty\\FullStackIntegrationTools\\SimpleWebApi\\bin\\Debug\\net6.0\\SimpleWebApi.dll --output C:\\Users\\Rafal\\Documents\\Projekty\\FullStackIntegrationTools\\Transpiler\\gen"
     }
   }
 }
