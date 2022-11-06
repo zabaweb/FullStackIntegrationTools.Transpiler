@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transpiler", "Transpiler\Transpiler.csproj", "{73615F18-C080-4FD9-BAF9-71134E1DC83C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transpiler", "Transpiler\Transpiler.csproj", "{73615F18-C080-4FD9-BAF9-71134E1DC83C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranspilerIntegrationTests", "TranspilerIntegrationTests\TranspilerIntegrationTests.csproj", "{053176FE-522A-466E-A3A7-B6AB4DB51377}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectsForTests", "ProjectsForTests", "{DB17888D-6B50-46DE-82F8-3A8CA142BE7C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleRazorProject", "SimpleRazorProject\SimpleRazorProject.csproj", "{2358A94B-FC48-40E0-A65A-B65D3B599C38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleWebApi", "SimpleWebApi\SimpleWebApi.csproj", "{0373507B-8323-4048-B4E4-67DD002E3603}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebApi", "MinimalWebApi\MinimalWebApi.csproj", "{9473722E-9139-4429-9FAF-5471A9D86E08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,30 @@ Global
 		{73615F18-C080-4FD9-BAF9-71134E1DC83C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73615F18-C080-4FD9-BAF9-71134E1DC83C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73615F18-C080-4FD9-BAF9-71134E1DC83C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053176FE-522A-466E-A3A7-B6AB4DB51377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053176FE-522A-466E-A3A7-B6AB4DB51377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053176FE-522A-466E-A3A7-B6AB4DB51377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053176FE-522A-466E-A3A7-B6AB4DB51377}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2358A94B-FC48-40E0-A65A-B65D3B599C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2358A94B-FC48-40E0-A65A-B65D3B599C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2358A94B-FC48-40E0-A65A-B65D3B599C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2358A94B-FC48-40E0-A65A-B65D3B599C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0373507B-8323-4048-B4E4-67DD002E3603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0373507B-8323-4048-B4E4-67DD002E3603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0373507B-8323-4048-B4E4-67DD002E3603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0373507B-8323-4048-B4E4-67DD002E3603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9473722E-9139-4429-9FAF-5471A9D86E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9473722E-9139-4429-9FAF-5471A9D86E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9473722E-9139-4429-9FAF-5471A9D86E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9473722E-9139-4429-9FAF-5471A9D86E08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2358A94B-FC48-40E0-A65A-B65D3B599C38} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
+		{0373507B-8323-4048-B4E4-67DD002E3603} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
+		{9473722E-9139-4429-9FAF-5471A9D86E08} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C6A6C77-2FC7-471E-BF1B-D7ED06E3E215}
