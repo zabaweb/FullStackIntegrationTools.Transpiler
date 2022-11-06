@@ -1,4 +1,4 @@
-﻿namespace Transpiler;
+﻿namespace Transpiler.Helpers;
 
 public static class TypeExtensions
 {

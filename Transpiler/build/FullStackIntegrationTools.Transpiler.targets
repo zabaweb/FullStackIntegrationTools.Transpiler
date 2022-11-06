@@ -1,7 +1,7 @@
 <Project>
     <Target Name="FSIT_Transpile_PostCompileTarget" AfterTargets="Build">
-        <Message Importance="high" Text="FSIT-Transpile PostCompileTarget Started" />
-        <Exec Command="$(FullStackIntegrationTools_Transpiler)" />
+      <Message Importance="high" Text="FSIT-Transpile PostCompileTarget Started" />
+        <Exec Command="$(FullStackIntegrationTools_Transpiler) --assembly $(OutputPath)$(MSBuildProjectName).dll" />
         <Message Importance="high" Text="FSIT-Transpile PostCompileTarget Ended" />
     </Target>
 </Project>

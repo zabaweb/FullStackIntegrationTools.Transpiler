@@ -1,16 +1,18 @@
 using SimpleWebApi;
 using Transpiler;
+using Transpiler.Helpers;
+using Transpiler.Models;
 
 namespace TranspilerIntegrationTests;
 
-public class NaiveDllParserTests
+public class NaiveParserTests
 {
     [Fact]
     public void Parse_ForSimpleWebApi_ShouldParseExpectedClasses()
     {
-        var analyzer = new NaiveDllParser();
-        var input = new ControllerModel[] {
-            new ControllerModel{
+        var analyzer = new NaiveParser();
+        var input = new EndpointModel[] {
+            new EndpointModel{
                 Name = "CalendarController",
                 Methods = new []{
                     new MethodModel{
@@ -19,7 +21,7 @@ public class NaiveDllParserTests
                     }
                 },
             },
-            new ControllerModel{
+            new EndpointModel{
                 Name = "WeatherForecastController",
                 Methods = new []{
                     new MethodModel{
@@ -35,20 +37,20 @@ public class NaiveDllParserTests
         };
         var result = analyzer.Parse(input);
 
-        var expectedResult = new TsType[] {
-            new TsType{
+        var expectedResult = new TypeModel[] {
+            new TypeModel{
                 FullName = "SimpleWebApi.WeatherForecast",
-                Properties = new Dictionary<string,TsProperty> {
-                    { "TemperatureC", new TsProperty { TypeFullName = typeof(int).FullNameSupress() } },
-                    { "Summary", new TsProperty { TypeFullName = typeof(WeatherForecastSummary).FullNameSupress() } },
+                Properties = new Dictionary<string,PropertyModel> {
+                    { "TemperatureC", new PropertyModel { TypeFullName = typeof(int).FullNameSupress() } },
+                    { "Summary", new PropertyModel { TypeFullName = typeof(WeatherForecastSummary).FullNameSupress() } },
                 }
             },
-            new TsType{
+            new TypeModel{
                 FullName = "SimpleWebApi.WeatherForecastSummary",
-                Properties = new Dictionary<string,TsProperty> {
-                    { "OneProperty", new TsProperty { TypeFullName = typeof(string).FullNameSupress() } },
-                    { "TwoProperty", new TsProperty { TypeFullName = typeof(bool).FullNameSupress() } },
-                    { "ThreeProperty", new TsProperty { TypeFullName = typeof(string).FullNameSupress(), ArrayNesting = 2 } },
+                Properties = new Dictionary<string,PropertyModel> {
+                    { "OneProperty", new PropertyModel { TypeFullName = typeof(string).FullNameSupress() } },
+                    { "TwoProperty", new PropertyModel { TypeFullName = typeof(bool).FullNameSupress() } },
+                    { "ThreeProperty", new PropertyModel { TypeFullName = typeof(string).FullNameSupress(), ArrayNesting = 2 } },
                 }
             }
         };

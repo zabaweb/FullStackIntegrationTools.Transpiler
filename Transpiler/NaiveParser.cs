@@ -1,8 +1,10 @@
 ﻿namespace Transpiler;
 
 using System.Collections.Generic;
+using Transpiler.Helpers;
+using Transpiler.Models;
 
-public class NaiveDllParser
+public class NaiveParser
 {
     public static readonly Dictionary<string, Type> SimpleTypes = new Type[] {
         typeof(string),
@@ -10,7 +12,7 @@ public class NaiveDllParser
         typeof(bool),
     }.ToDictionary(x => x.FullName ?? throw new Exception("2"), x => x);
 
-    public TsType[] Parse(ControllerModel[] models)
+    public TypeModel[] Parse(EndpointModel[] models)
     {
         var typesToParse = models
            .SelectMany(x => x.Methods)
@@ -18,7 +20,7 @@ public class NaiveDllParser
            .Select(x => UnpackArray(x).type)
            .ToList();
 
-        var paresdTypes = new Dictionary<string, TsType>();
+        var paresdTypes = new Dictionary<string, TypeModel>();
         for(int tIndex = 0; tIndex < typesToParse.Count; tIndex++)
         {
             var type = typesToParse[tIndex];
@@ -32,7 +34,7 @@ public class NaiveDllParser
                 continue;
             }
 
-            var properties = new Dictionary<string, TsProperty>();
+            var properties = new Dictionary<string, PropertyModel>();
 
             foreach(var prop in type.GetProperties())
             {
@@ -45,14 +47,14 @@ public class NaiveDllParser
 
                 properties.Add(
                     prop.Name,
-                    new TsProperty
+                    new PropertyModel
                     {
                         ArrayNesting = nesting,
                         TypeFullName = propertyType.FullNameSupress()
                     });
             }
 
-            var tsType = new TsType
+            var tsType = new TypeModel
             {
                 FullName = type.FullNameSupress(),
                 Properties = properties

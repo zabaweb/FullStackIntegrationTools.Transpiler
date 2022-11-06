@@ -1,4 +1,4 @@
-﻿namespace Transpiler;
+﻿namespace Transpiler.Models;
 
 public class MethodModel
 {

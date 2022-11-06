@@ -1,21 +1,22 @@
 using SimpleWebApi;
 using SimpleWebApi.Controllers;
 using Transpiler;
+using Transpiler.Models;
 
 namespace TranspilerIntegrationTests;
 
-public class NaiveDllEndpointsExtractorTests
+public class NaiveAssemblyEndpointsExtractorTests
 {
     [Fact]
     public void GetEndpoints_ForSimpleWebApi_ShouldReturnAllEndpoints()
     {
         var assembly = typeof(WeatherForecastController).Assembly;
 
-        var analyzer = new NaiveDllEndpointsExtractor();
+        var analyzer = new NaiveAssemblyEndpointsExtractor();
         var result = analyzer.GetEndpoints(assembly);
 
-        var expectedResult = new ControllerModel[] {
-            new ControllerModel{
+        var expectedResult = new EndpointModel[] {
+            new EndpointModel{
                 Name = "CalendarController",
                 Methods = new []{
                     new MethodModel{
@@ -24,7 +25,7 @@ public class NaiveDllEndpointsExtractorTests
                     }
                 },
             },
-            new ControllerModel{
+            new EndpointModel{
                 Name = "WeatherForecastController",
                 Methods = new []{
                     new MethodModel{

@@ -10,6 +10,9 @@
     <developmentDependency>true</developmentDependency>
     <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+      <dependency id="CommandLineParser" version="2.9.1" />
+    </dependencies>
   </metadata>
   <files>
     <file src="build\FullStackIntegrationTools.Transpiler.props" target="build" />

@@ -1,7 +1,8 @@
-﻿namespace Transpiler;
+﻿namespace Transpiler.Models;
 
-public class TsProperty
+public class PropertyModel
 {
     public uint ArrayNesting { get; init; }
+
     public string TypeFullName { get; init; }
 }
