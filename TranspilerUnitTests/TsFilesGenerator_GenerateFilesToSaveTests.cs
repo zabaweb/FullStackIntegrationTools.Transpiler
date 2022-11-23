@@ -31,17 +31,19 @@ public class TsFilesGenerator_GenerateFilesToSaveTests
         };
         var result = analyzer.GenerateFilesToSave(input);
 
+        result = result.ToDictionary(x => x.Key, x => x.Value.ReplaceLineEndings());
+
         var expectedResult = new Dictionary<string, string>
         {
             {
                 @"rootDir/SimpleWebApi/WeatherForecast.ts",
-               @"import WeatherForecastSummary from ""./WeatherForecastSummary"";
+               @"import WeatherForecastSummary from ""WeatherForecastSummary"";
 
 export default class WeatherForecast{
 	TemperatureC: number;
 	Summary: WeatherForecastSummary;
 }
-".ReplaceLineEndings("\r\n")
+"
             },
             { @"rootDir/SimpleWebApi/WeatherForecastSummary.ts",
             @"export default class WeatherForecastSummary{
@@ -49,7 +51,7 @@ export default class WeatherForecast{
 	TwoProperty: boolean;
 	ThreeProperty: string[][];
 }
-".ReplaceLineEndings("\r\n")
+"
             },
         };
 
