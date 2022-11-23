@@ -31,6 +31,8 @@ public class TsFilesGenerator_GenerateFilesToSaveTests
         };
         var result = analyzer.GenerateFilesToSave(input);
 
+        result = result.ToDictionary(x => x.Key, x => x.Value.ReplaceLineEndings());
+
         var expectedResult = new Dictionary<string, string>
         {
             {
