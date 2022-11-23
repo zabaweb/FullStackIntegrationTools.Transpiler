@@ -13,7 +13,7 @@ public class TheTest
         var outputPath = $@"..\temp\{testGuid}";
         Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
         Directory.CreateDirectory(outputPath);
-        var ddd = Directory.EnumerateFiles("./");
+
         const string assemblyPath = @"../../../../ProjectWithAssemblyDependency\bin\Debug\net6.0\ProjectWithAssemblyDependency.dll";
         var config = new Config
         {
