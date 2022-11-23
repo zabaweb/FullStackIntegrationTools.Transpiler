@@ -102,14 +102,7 @@ export default class WeatherForecast{
         };
         var result = analyzer.GenerateFilesToSave(input);
 
-        var expectedResult = new Dictionary<string, string>
-        {
-            {
-                @"rootDir/Some/Path/To/TestEnum.ts",
-"export default enum TestEnum {\r\n\tV1 = 1,\r\n\tV2 = 2,\r\n\tV3 = 3,\r\n}\r\n"
-            },
-        };
-
-        result.Should().BeEquivalentTo(expectedResult);
+        result[@"rootDir/Some/Path/To/TestEnum.ts"].ReplaceLineEndings()
+            .Should().BeEquivalentTo("export default enum TestEnum {\r\n\tV1 = 1,\r\n\tV2 = 2,\r\n\tV3 = 3,\r\n}\r\n".ReplaceLineEndings());
     }
 }
