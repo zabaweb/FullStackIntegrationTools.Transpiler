@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebApi", "MinimalWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranspilerUnitTests", "TranspilerUnitTests\TranspilerUnitTests.csproj", "{D1988E55-80DA-4925-9FF7-A876A101EA81}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWithAssemblyDependency", "ProjectWithAssemblyDependency\ProjectWithAssemblyDependency.csproj", "{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{D1988E55-80DA-4925-9FF7-A876A101EA81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1988E55-80DA-4925-9FF7-A876A101EA81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1988E55-80DA-4925-9FF7-A876A101EA81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{2358A94B-FC48-40E0-A65A-B65D3B599C38} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
 		{0373507B-8323-4048-B4E4-67DD002E3603} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
 		{9473722E-9139-4429-9FAF-5471A9D86E08} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
+		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C6A6C77-2FC7-471E-BF1B-D7ED06E3E215}

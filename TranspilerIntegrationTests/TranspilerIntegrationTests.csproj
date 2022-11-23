@@ -23,9 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MinimalWebApi\MinimalWebApi.csproj" />
-    <ProjectReference Include="..\SimpleRazorProject\SimpleRazorProject.csproj" />
-    <ProjectReference Include="..\SimpleWebApi\SimpleWebApi.csproj" />
     <ProjectReference Include="..\Transpiler\Transpiler.csproj" />
   </ItemGroup>
 

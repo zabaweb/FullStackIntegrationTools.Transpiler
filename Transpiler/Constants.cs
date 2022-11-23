@@ -5,7 +5,8 @@ public static class Constants
     {
       { "System.Boolean", "boolean" },
 
-      //{ "System.DateTime", "Date"},
+      { "System.DateTime", "Date"},
+      { "System.Object", "any"},
 
       { "System.String", "string"},
       { "System.Guid", "string"},

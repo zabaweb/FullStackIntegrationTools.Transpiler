@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Transpiler.Models;
 
 namespace Transpiler;
@@ -35,8 +34,17 @@ public class NaiveAssemblyEndpointsExtractor
     {
         try
         {
-            var result = attr.AttributeType.IsAssignableTo(typeof(HttpMethodAttribute));
-            return result;
+            var type = attr.AttributeType;
+            while(type != null)
+            {
+                if(type.Name == "HttpMethodAttribute")
+                {
+
+                    return true;
+                }
+                type = type.BaseType;
+            }
+            return false;
         }
         catch(Exception)
         {

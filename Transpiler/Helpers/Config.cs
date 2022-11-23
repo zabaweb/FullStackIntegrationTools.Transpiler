@@ -1,7 +1,7 @@
 ﻿namespace Transpiler.Helpers;
 using CommandLine;
 
-internal class Config
+public class Config
 {
     [Option('v', "verbose", Required = false, HelpText = "Set output to verbose messages.")]
     public bool Verbose { get; set; }

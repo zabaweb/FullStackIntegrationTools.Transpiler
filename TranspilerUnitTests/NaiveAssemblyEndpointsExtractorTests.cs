@@ -20,6 +20,7 @@ public class NaiveAssemblyEndpointsExtractorTests
                 Name = "CalendarController",
                 Methods = new []{
                     new MethodModel{
+                        MethodName = "IsLeapYear",
                         Parameters = new Type[]{typeof(int) },
                         ReturnType = typeof(bool),
                     }
@@ -29,10 +30,12 @@ public class NaiveAssemblyEndpointsExtractorTests
                 Name = "WeatherForecastController",
                 Methods = new []{
                     new MethodModel{
+                        MethodName = "Get",
                         Parameters = new Type[]{ },
                         ReturnType = typeof(IEnumerable<WeatherForecast>),
                     },
                     new MethodModel{
+                        MethodName = "PostForCity",
                         Parameters = new Type[]{ typeof(string) },
                         ReturnType = typeof(WeatherForecast),
                     }

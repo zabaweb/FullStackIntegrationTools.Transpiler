@@ -15,9 +15,18 @@ public class TsFilesGenerator
     {
         var uniquenessCheck = types.ToDictionary(t => t.FullName);
 
-        var classesToSave = types.ToDictionary(t => $"{_root}/{t.FullName.Replace(".", "/")}.ts", t => ToTsClassFileContent(t));
+        var classesToSave = types.ToDictionary(ToFileName(), t => ToTsFileContent(t));
 
         return classesToSave;
+    }
+
+    private Func<TypeModel, string> ToFileName()
+    {
+        return t =>
+        {
+            var withoutGenericParams = t.FullName.Split("<")[0];
+            return $"{_root}/{withoutGenericParams.Replace(".", "/")}.ts";
+        };
     }
 
     public async Task Save(TypeModel[] types)
@@ -33,7 +42,40 @@ public class TsFilesGenerator
 
     }
 
-    private string ToTsClassFileContent(TypeModel t)
+    private string ToTsFileContent(TypeModel t)
+    {
+        return t switch
+        {
+            ClassModel classModel => ToTsClassFileContent(classModel),
+            EnumModel enumModel => ToTsEnumFileContent(enumModel),
+            _ => throw new Exception("4")
+        };
+    }
+
+    private string ToTsEnumFileContent(EnumModel enumModel)
+    {
+        var builder = new StringBuilder();
+        var hasValues = enumModel.Pairs.Count > 0;
+        builder.Append($"export default enum {enumModel.FullName.Split(".").Last()}");
+        var ddd = hasValues ? "{" : "{}";
+        builder.AppendLine($" {ddd}");
+
+        if(!hasValues)
+        {
+            return builder.ToString(); ;
+        }
+
+        foreach(var (valueLabel, value) in enumModel.Pairs)
+        {
+            builder.AppendLine($"\t{valueLabel} = {value},");
+        }
+
+        builder.AppendLine("}");
+
+        return builder.ToString();
+    }
+
+    private string ToTsClassFileContent(ClassModel t)
     {
         var properties = new StringBuilder();
         var usings = new HashSet<string>();
@@ -41,12 +83,8 @@ public class TsFilesGenerator
 
         foreach(var (propertyName, model) in t.Properties)
         {
-            if(model.TypeCategory == TypeCategory.Enum)
-            {
-                continue;
-            }
             var fileType = ToFileType(model);
-            if(fileType.isCustomType && fileType.typeFullName != t.FullName)
+            if(fileType.isCustomType && fileType.typeFullName != t.FullName && !model.IsGeneric)
             {
                 var usingValue = GetUsingLine(t.FullName, model.TypeFullName);
                 usings.Add(usingValue);
@@ -60,7 +98,7 @@ public class TsFilesGenerator
         var builder = new StringBuilder();
 
         foreach(var usi in usings) { builder.AppendLine(usi); }
-        builder.AppendLine();
+        if(usings.Any()) { builder.AppendLine(); }
         builder.AppendLine($"export default class {className}{{");
         builder.Append(properties.ToString());
         builder.AppendLine("}");
@@ -88,6 +126,11 @@ public class TsFilesGenerator
         classArr = classArr.Skip(diffIndex).ToArray();
         propArr = propArr.Skip(diffIndex).ToArray();
         var goToRoot = string.Join("", classArr.Select(x => "../"));
+        if(String.IsNullOrWhiteSpace(goToRoot))
+        {
+            goToRoot = "./";
+        }
+
         var pathToClass = string.Join("/", propArr);
 
 
