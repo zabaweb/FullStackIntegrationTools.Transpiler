@@ -6,7 +6,7 @@ public class PropertyModel
 
     public bool IsGeneric { get; init; }
 
-    public string TypeFullName { get; init; }
+    public string TypeFullName { get; init; } = "";
 
     public TypeCategory TypeCategory { get; init; }
 

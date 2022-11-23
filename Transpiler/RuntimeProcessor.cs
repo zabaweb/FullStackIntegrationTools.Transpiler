@@ -7,6 +7,11 @@ public class RuntimeProcessor
 {
     public async Task Run(Config config)
     {
+        if(config == null)
+        {
+            throw new Exception("66");
+        }
+
         var assembly = await AssemblyUtils.GetAssembly(config.AssemblyPath);
 
         var extractor = new NaiveAssemblyEndpointsExtractor();

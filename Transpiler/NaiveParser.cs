@@ -131,6 +131,11 @@ public class NaiveParser
         var temp = type;
         for(var i = 0u; i <= 10; i++)
         {
+            if(temp == null)
+            {
+                throw new Exception("7");
+            }
+
             if(temp.Name == typeof(Nullable<>).Name)
             {
                 isNullable = true;

@@ -35,7 +35,7 @@ public class TsFilesGenerator
 
         foreach(var (path, content) in classesToSave)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            Directory.CreateDirectory(Path.GetDirectoryName(path) ?? throw new Exception());
             using var fileHandler = File.CreateText(path);
             await fileHandler.WriteAsync(content);
         }

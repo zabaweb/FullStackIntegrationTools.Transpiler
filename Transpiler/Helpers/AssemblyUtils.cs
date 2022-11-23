@@ -4,15 +4,15 @@ namespace Transpiler.Helpers;
 internal static class AssemblyUtils
 {
     public static string? RootAssemblyDirectory;
-    public static async Task<Assembly> GetAssembly(string assemblyPath)
+    public static Task<Assembly> GetAssembly(string assemblyPath)
     {
         AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
         var assembly = Assembly.LoadFrom(assemblyPath);
         RootAssemblyDirectory = new FileInfo(assemblyPath).Directory?.FullName;
-        return assembly;
+        return Task.FromResult(assembly);
     }
 
-    private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+    private static Assembly CurrentDomain_AssemblyResolve(object? sender, ResolveEventArgs args)
     {
         var assemblyName = args.Name.Split(",").First();
         var assemblyToLoadPath = @$"{RootAssemblyDirectory}\{assemblyName}.dll";

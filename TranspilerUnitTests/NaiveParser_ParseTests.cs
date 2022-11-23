@@ -155,8 +155,9 @@ public class NaiveParser_ParseTests
         result.Should().BeEquivalentTo(expectedResult);
         result.First().Should().BeAssignableTo<EnumModel>();
         var givenEnumModel = result.First() as EnumModel;
-        givenEnumModel.Pairs.Keys.Should().BeEquivalentTo(new[] { 1, 2, 4 }.Select(x => $"Value{x}"));
-        givenEnumModel.Pairs.Values.Should().BeEquivalentTo(new[] { 1, 2, 4 }.Select(x => new BigInteger(x)));
+
+        (givenEnumModel?.Pairs.Keys).Should().BeEquivalentTo(new[] { 1, 2, 4 }.Select(x => $"Value{x}"));
+        (givenEnumModel?.Pairs.Values).Should().BeEquivalentTo(new[] { 1, 2, 4 }.Select(x => new BigInteger(x)));
     }
 
     private EndpointModel[] AsEndps(MethodModel[] methods) => new[] { new EndpointModel { Methods = methods } };
@@ -175,6 +176,7 @@ enum SameValueForDifferentLabeslTestEnum
     Value1 = 1,
     Value_1 = 1,
 }
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 enum ULongTestEnum: ulong { Value1 = 1 }
 enum LongTestEnum: long { Value1 = 1 }
@@ -193,3 +195,4 @@ class GenericClass3<T1, T2, T3>
     public T2 Type2 { get; set; }
     public T3 Type3 { get; set; }
 }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
