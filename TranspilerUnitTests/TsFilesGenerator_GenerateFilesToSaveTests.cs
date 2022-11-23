@@ -37,13 +37,13 @@ public class TsFilesGenerator_GenerateFilesToSaveTests
         {
             {
                 @"rootDir/SimpleWebApi/WeatherForecast.ts",
-               @"import WeatherForecastSummary from ""WeatherForecastSummary"";
+               @"import WeatherForecastSummary from ""./WeatherForecastSummary"";
 
 export default class WeatherForecast{
 	TemperatureC: number;
 	Summary: WeatherForecastSummary;
 }
-"
+".ReplaceLineEndings()
             },
             { @"rootDir/SimpleWebApi/WeatherForecastSummary.ts",
             @"export default class WeatherForecastSummary{
@@ -51,7 +51,7 @@ export default class WeatherForecast{
 	TwoProperty: boolean;
 	ThreeProperty: string[][];
 }
-"
+".ReplaceLineEndings()
             },
         };
 

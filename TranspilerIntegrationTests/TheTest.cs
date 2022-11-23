@@ -10,7 +10,7 @@ public class TheTest
     {
         var procesor = new RuntimeProcessor();
         var testGuid = Guid.NewGuid();
-        var outputPath = $@"..\temp\{testGuid}";
+        var outputPath = $@"./temp\{testGuid}";
         Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
         Directory.CreateDirectory(outputPath);
 
