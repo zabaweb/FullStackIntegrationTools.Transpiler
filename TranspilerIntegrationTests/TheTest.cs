@@ -11,7 +11,8 @@ public class TheTest
         var procesor = new RuntimeProcessor();
         var testGuid = Guid.NewGuid();
         var outputPath = $@"./temp\{testGuid}";
-        Directory.CreateDirectory(Path.GetDirectoryName(outputPath));
+        var realPath = Path.GetDirectoryName(outputPath) ?? throw new ArgumentNullException(nameof(outputPath));
+        Directory.CreateDirectory(realPath);
         Directory.CreateDirectory(outputPath);
 
         const string assemblyPath = @"../../../../ProjectWithAssemblyDependency\bin\Debug\net6.0\ProjectWithAssemblyDependency.dll";
