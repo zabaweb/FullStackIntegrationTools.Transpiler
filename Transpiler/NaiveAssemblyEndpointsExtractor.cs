@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Transpiler.Helpers;
 using Transpiler.Models;
 
 namespace Transpiler;
@@ -7,6 +8,8 @@ public class NaiveAssemblyEndpointsExtractor
 {
     public EndpointModel[] GetEndpoints(Assembly asm)
     {
+        AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyUtils.CurrentDomain_AssemblyResolve);
+
         var types = asm.GetTypes();
         var controllers = types.Where(t => t.Name.EndsWith("Controller"));
         var methodMap = controllers.ToDictionary(x => x.Name ?? "", x => GetMethods(x));

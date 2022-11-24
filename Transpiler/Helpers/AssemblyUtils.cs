@@ -16,7 +16,7 @@ internal static class AssemblyUtils
         return Task.FromResult(assembly);
     }
 
-    private static Assembly CurrentDomain_AssemblyResolve(object? sender, ResolveEventArgs args)
+    public static Assembly CurrentDomain_AssemblyResolve(object? sender, ResolveEventArgs args)
     {
         Log.Information($"Resolving assembly {args.Name}");
         var assemblyName = args.Name.Split(",").First();
