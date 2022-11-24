@@ -1,4 +1,5 @@
-﻿using Transpiler.Helpers;
+﻿using Serilog;
+using Transpiler.Helpers;
 using Transpiler.Models;
 
 namespace Transpiler;
@@ -7,10 +8,7 @@ public class RuntimeProcessor
 {
     public async Task Run(Config config)
     {
-        if(config == null)
-        {
-            throw new Exception("66");
-        }
+        Log.Information("Run init");
 
         var assembly = await AssemblyUtils.GetAssembly(config.AssemblyPath);
 
@@ -25,6 +23,8 @@ public class RuntimeProcessor
 
         var generator = new TsFilesGenerator(config.OutputPath);
         await generator.Save(types);
+
+        Log.Information("Saved files");
 
         static string ToLogString(EndpointModel x)
         {

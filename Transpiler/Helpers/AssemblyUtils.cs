@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Serilog;
 
 namespace Transpiler.Helpers;
 internal static class AssemblyUtils
@@ -6,14 +7,18 @@ internal static class AssemblyUtils
     public static string? RootAssemblyDirectory;
     public static Task<Assembly> GetAssembly(string assemblyPath)
     {
+        Log.Information($"Retriving assembly from path {assemblyPath}");
+
         AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
         var assembly = Assembly.LoadFrom(assemblyPath);
+
         RootAssemblyDirectory = new FileInfo(assemblyPath).Directory?.FullName;
         return Task.FromResult(assembly);
     }
 
     private static Assembly CurrentDomain_AssemblyResolve(object? sender, ResolveEventArgs args)
     {
+        Log.Information($"Resolving assembly {args.Name}");
         var assemblyName = args.Name.Split(",").First();
         var assemblyToLoadPath = @$"{RootAssemblyDirectory}\{assemblyName}.dll";
         if(DllExists())
