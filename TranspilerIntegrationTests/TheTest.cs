@@ -42,6 +42,20 @@ public class TheTest
         var settings = Settings.LoadDefaultSettings(null);
         var nugetDiectory = SettingsUtility.GetGlobalPackagesFolder(settings);
 
-        throw new Exception(nugetDiectory);
+        var subdirs = Directory.EnumerateDirectories(nugetDiectory);
+
+        throw new Exception(String.Join("\r\n", subdirs));
+    }
+
+    [Fact]
+    public void DirPath()
+    {
+        var assemblyPath = this.GetType().Assembly.Location;
+        var assemblyDir = new FileInfo(assemblyPath).Directory?.FullName;
+
+
+        var subdirs = Directory.EnumerateFiles(assemblyDir);
+
+        throw new Exception(String.Join("\r\n", subdirs));
     }
 }
