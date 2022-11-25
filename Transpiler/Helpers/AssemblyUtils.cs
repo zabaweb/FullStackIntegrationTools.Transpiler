@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using NuGet.Configuration;
 using Serilog;
 
 namespace Transpiler.Helpers;
@@ -26,7 +27,8 @@ internal static class AssemblyUtils
             return LoadAndReturnAssembly();
         }
 
-        var nugetDiectory = @"%USERPROFILE%\.nuget\packages\";
+        var settings = Settings.LoadDefaultSettings(null);
+        var nugetDiectory = SettingsUtility.GetGlobalPackagesFolder(settings);
         var pathWithEnv = $@"{nugetDiectory}{assemblyName.ToLower()}\";// 2.2.5\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll";
 
         var rootNugetPath = Environment.ExpandEnvironmentVariables(pathWithEnv);
