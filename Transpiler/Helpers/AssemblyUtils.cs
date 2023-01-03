@@ -15,6 +15,11 @@ internal static class AssemblyUtils
     {
         Log.Information($"Retriving assembly from path {assemblyPath}");
 
+        if(!DotnetDirectories.Any(d => Directory.Exists(d)))
+        {
+            throw new Exception("No dotnet directory");
+        }
+
         AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
         var assembly = LoadAssembly(assemblyPath);
 
@@ -49,7 +54,7 @@ internal static class AssemblyUtils
             return sdkResult;
         }
 
-        Log.Information($"Assembly couldn't be resolved {assemblyName}");
+        Log.Error($"Assembly couldn't be resolved {assemblyName}");
         throw new Exception("3");
     }
 
