@@ -23,7 +23,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Check variables
-      run: dotnet --list-runtimes; dotnet --list-sdks;
+      run: dotnet --list-runtimes; dotnet --list-sdks; ls /usr/share/dotnet/shared
     - name: Build
       run: dotnet build --no-restore
     - name: Test
