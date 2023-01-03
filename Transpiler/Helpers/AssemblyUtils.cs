@@ -9,7 +9,7 @@ internal static class AssemblyUtils
 {
     public static string? RootAssemblyDirectory;
     public static string RuntimeFilePattern = "*.runtimeconfig.json";
-    public static string[] DotnetDirectories = { "/home/user/share/dotnet", "/usr/bin/dotnet", "/usr/local/share/dotnet", @"C:\Program Files\dotnet" };
+    public static string[] DotnetDirectories = { "/usr/share/dotnet", @"C:\Program Files\dotnet" };
 
     public static Task<Assembly?> GetAssembly(string assemblyPath)
     {
