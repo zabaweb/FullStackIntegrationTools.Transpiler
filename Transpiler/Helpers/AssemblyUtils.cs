@@ -194,7 +194,7 @@ internal static class AssemblyUtils
     {
         try
         {
-            return Assembly.LoadFile(assemblyToLoadPath);
+            return Assembly.LoadFrom(assemblyToLoadPath);
         }
         catch(Exception ex)
         {

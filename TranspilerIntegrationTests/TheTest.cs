@@ -1,4 +1,3 @@
-using System.Reflection;
 using Transpiler;
 using Transpiler.Helpers;
 
@@ -29,13 +28,4 @@ public class TheTest
         await procesor.Run(config);
         Directory.Delete(outputPath, recursive: true);
     }
-    [Fact]
-    public async Task GenerateFilesToSave_ForSimpleWebApi_ShouldGenerateExpectedClassess()
-    {
-        var path = "/usr/share/dotnet/shared/Microsoft.AspNetCore.App/6.0.12/Microsoft.AspNetCore.Mvc.Core.dll";
-        var asembly = Assembly.LoadFile(path);
-
-        Assert.NotNull(asembly);
-    }
-
 }
