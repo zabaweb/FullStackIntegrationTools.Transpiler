@@ -124,7 +124,7 @@ internal static class AssemblyUtils
                     catch(Exception ex)
                     {
                         Log.Warning($"Failed to load assembly from {potentialPath}.", ex);
-                        throw ex;
+                        throw;
                         return null;
                     }
                 }
