@@ -22,8 +22,10 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Check variables
-      run: dotnet --list-runtimes; dotnet --list-sdks; ls /usr/share/dotnet/shared
+    - name: Microsoft.AspNetCore.App
+      run: ls /usr/share/dotnet/shared/Microsoft.AspNetCore.App
+    - name: Microsoft.NETCore.App
+      run: ls /usr/share/dotnet/shared/Microsoft.NETCore.App
     - name: Build
       run: dotnet build --no-restore
     - name: Test
