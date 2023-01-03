@@ -9,9 +9,9 @@ internal static class AssemblyUtils
 {
     public static string? RootAssemblyDirectory;
     public static string RuntimeFilePattern = "*.runtimeconfig.json";
-    public static string[] DotnetDirectories = { @"C:\Program Files\dotnet", "/usr/bin/dotnet" };
+    public static string[] DotnetDirectories = { @"C:\Program Files\dotnet", "/usr/bin/dotnet", "/usr/local/share/dotnet" };
 
-    public static Task<Assembly> GetAssembly(string assemblyPath)
+    public static Task<Assembly?> GetAssembly(string assemblyPath)
     {
         Log.Information($"Retriving assembly from path {assemblyPath}");
 
@@ -103,22 +103,28 @@ internal static class AssemblyUtils
                         .Select(dv => uint.Parse(dv.Split(".")[2]))
                         .Max();
 
-                    if(maxPatchVersion >= patch)
+                    if(maxPatchVersion < patch)
                     {
-                        var potentialPath = @$"{frameworkDirectory}\{majorMinor}.{maxPatchVersion}\{assemblyName.Name}.dll";
-                        if(File.Exists(potentialPath))
-                        {
-                            try
-                            {
-                                return Assembly.UnsafeLoadFrom(potentialPath);
-                            }
-                            catch(Exception ex)
-                            {
-                                Log.Error($"Failed to load assembly from {potentialPath}", ex);
-                                return null;
-                            }
+                        Log.Warning($"Max patch version {maxPatchVersion} is lower than expected ({frameworkName}, {patch}).");
+                        continue;
+                    }
 
-                        }
+                    var potentialPath = @$"{frameworkDirectory}\{majorMinor}.{maxPatchVersion}\{assemblyName.Name}.dll";
+                    if(!File.Exists(potentialPath))
+                    {
+                        Log.Warning($"Expected path {potentialPath} does not exist ({frameworkName}, {patch}).");
+
+                        continue;
+                    }
+
+                    try
+                    {
+                        return Assembly.UnsafeLoadFrom(potentialPath);
+                    }
+                    catch(Exception ex)
+                    {
+                        Log.Warning($"Failed to load assembly from {potentialPath}.", ex);
+                        return null;
                     }
                 }
             }
