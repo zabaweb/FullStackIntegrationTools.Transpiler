@@ -23,9 +23,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Microsoft.AspNetCore.App
-      run: ls /usr/share/dotnet/shared/Microsoft.AspNetCore.App
-    - name: Microsoft.NETCore.App
-      run: ls /usr/share/dotnet/shared/Microsoft.NETCore.App
+      run: ls /usr/share/dotnet/shared/Microsoft.AspNetCore.App/6.0.12
     - name: Build
       run: dotnet build --no-restore
     - name: Test
