@@ -54,6 +54,12 @@ internal static class AssemblyUtils
             return sdkResult;
         }
 
+        if(File.Exists("/usr/share/dotnet/shared/Microsoft.AspNetCore.App/6.0.12/Microsoft.AspNetCore.Mvc.Core.dll"))
+        {
+            return Assembly.UnsafeLoadFrom("/usr/share/dotnet/shared/Microsoft.AspNetCore.App/6.0.12/Microsoft.AspNetCore.Mvc.Core.dll");
+
+        }
+
         Log.Error($"Assembly couldn't be resolved {assemblyName}");
         throw new Exception("3");
     }
