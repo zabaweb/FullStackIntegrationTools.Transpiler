@@ -9,7 +9,7 @@ internal static class AssemblyUtils
 {
     public static string? RootAssemblyDirectory;
     public static string RuntimeFilePattern = "*.runtimeconfig.json";
-    public static string DotnetDirectory = @"C:\Program Files\dotnet";
+    public static string[] DotnetDirectories = { @"C:\Program Files\dotnet", "/usr/bin/dotnet" };
 
     public static Task<Assembly> GetAssembly(string assemblyPath)
     {
@@ -88,40 +88,41 @@ internal static class AssemblyUtils
         // https://natemcmaster.com/blog/2017/12/21/netcore-primitives/
         var assemblyName = new AssemblyName(args.Name);
         var frameworks = GetFrameworks(assemblyName);
-
-        foreach(var (frameworkName, versions) in frameworks)
+        foreach(var DotnetDirectory in DotnetDirectories)
         {
-            var frameworkDirectory = @$"{DotnetDirectory}\shared\{frameworkName}";
-
-            var dirVersions = Directory.EnumerateDirectories(frameworkDirectory).Select(x => x.Replace(frameworkDirectory, "").Replace("\\", ""));
-
-            foreach(var (majorMinor, patch) in versions)
+            foreach(var (frameworkName, versions) in frameworks)
             {
-                var maxPatchVersion = dirVersions
-                    .Where(dv => dv.StartsWith(majorMinor))
-                    .Select(dv => uint.Parse(dv.Split(".")[2]))
-                    .Max();
+                var frameworkDirectory = @$"{DotnetDirectory}\shared\{frameworkName}";
 
-                if(maxPatchVersion >= patch)
+                var dirVersions = Directory.EnumerateDirectories(frameworkDirectory).Select(x => x.Replace(frameworkDirectory, "").Replace("\\", ""));
+
+                foreach(var (majorMinor, patch) in versions)
                 {
-                    var potentialPath = @$"{frameworkDirectory}\{majorMinor}.{maxPatchVersion}\{assemblyName.Name}.dll";
-                    if(File.Exists(potentialPath))
-                    {
-                        try
-                        {
-                            return Assembly.UnsafeLoadFrom(potentialPath);
-                        }
-                        catch(Exception ex)
-                        {
-                            Log.Error($"Failed to load assembly from {potentialPath}", ex);
-                            return null;
-                        }
+                    var maxPatchVersion = dirVersions
+                        .Where(dv => dv.StartsWith(majorMinor))
+                        .Select(dv => uint.Parse(dv.Split(".")[2]))
+                        .Max();
 
+                    if(maxPatchVersion >= patch)
+                    {
+                        var potentialPath = @$"{frameworkDirectory}\{majorMinor}.{maxPatchVersion}\{assemblyName.Name}.dll";
+                        if(File.Exists(potentialPath))
+                        {
+                            try
+                            {
+                                return Assembly.UnsafeLoadFrom(potentialPath);
+                            }
+                            catch(Exception ex)
+                            {
+                                Log.Error($"Failed to load assembly from {potentialPath}", ex);
+                                return null;
+                            }
+
+                        }
                     }
                 }
             }
         }
-
         return null;
     }
 
