@@ -130,7 +130,7 @@ internal static class AssemblyUtils
 
                     try
                     {
-                        return Assembly.UnsafeLoadFrom(potentialPath);
+                        return Assembly.LoadFile(potentialPath);
                     }
                     catch(Exception ex)
                     {
@@ -194,7 +194,7 @@ internal static class AssemblyUtils
     {
         try
         {
-            return Assembly.UnsafeLoadFrom(assemblyToLoadPath);
+            return Assembly.LoadFile(assemblyToLoadPath);
         }
         catch(Exception ex)
         {
