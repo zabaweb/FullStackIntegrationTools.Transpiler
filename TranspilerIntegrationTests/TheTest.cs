@@ -1,4 +1,4 @@
-using System.Text.Json;
+using System.Reflection;
 using Transpiler;
 using Transpiler.Helpers;
 
@@ -32,8 +32,10 @@ public class TheTest
     [Fact]
     public async Task GenerateFilesToSave_ForSimpleWebApi_ShouldGenerateExpectedClassess()
     {
-        var fSecurity = File.GetAttributes("/usr/share/dotnet/shared/Microsoft.AspNetCore.App/6.0.12/Microsoft.AspNetCore.Mvc.Core.dll");
-        throw new Exception(JsonSerializer.Serialize(fSecurity));
+        var path = "/usr/share/dotnet/shared/Microsoft.AspNetCore.App/6.0.12/Microsoft.AspNetCore.Mvc.Core.dll";
+        var asembly = Assembly.Load(path);
+
+        Assert.NotNull(asembly);
     }
 
 }
