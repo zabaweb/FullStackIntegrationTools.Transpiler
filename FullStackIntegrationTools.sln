@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalWebApi", "MinimalWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranspilerUnitTests", "TranspilerUnitTests\TranspilerUnitTests.csproj", "{D1988E55-80DA-4925-9FF7-A876A101EA81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectWithAssemblyDependency", "ProjectWithAssemblyDependency\ProjectWithAssemblyDependency.csproj", "{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectWithAssemblyDependency", "ProjectWithAssemblyDependency\ProjectWithAssemblyDependency.csproj", "{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvironmentVerification", "EnvironmentVerification\EnvironmentVerification.csproj", "{3DB22E09-2DB9-46FB-941A-26B2079AA91D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB22E09-2DB9-46FB-941A-26B2079AA91D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB22E09-2DB9-46FB-941A-26B2079AA91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB22E09-2DB9-46FB-941A-26B2079AA91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB22E09-2DB9-46FB-941A-26B2079AA91D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
