@@ -124,18 +124,21 @@ internal static class AssemblyUtils
                     if(!File.Exists(potentialPath))
                     {
                         Log.Warning($"Expected path {potentialPath} does not exist ({frameworkName}, {patch}).");
-
                         continue;
                     }
 
                     try
                     {
-                        return Assembly.LoadFile(potentialPath);
+                        var asm = LoadAssembly(potentialPath);
+
+                        if(asm != null)
+                        {
+                            return asm;
+                        }
                     }
                     catch(Exception ex)
                     {
                         Log.Warning($"Failed to load assembly from {potentialPath}.", ex);
-                        continue;
                     }
                 }
             }
