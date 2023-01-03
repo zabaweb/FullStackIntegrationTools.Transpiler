@@ -9,7 +9,7 @@ internal static class AssemblyUtils
 {
     public static string? RootAssemblyDirectory;
     public static string RuntimeFilePattern = "*.runtimeconfig.json";
-    public static string[] DotnetDirectories = { @"C:\Program Files\dotnet", "/usr/bin/dotnet", "/usr/local/share/dotnet" };
+    public static string[] DotnetDirectories = { "/usr/bin/dotnet", "/usr/local/share/dotnet", @"C:\Program Files\dotnet" };
 
     public static Task<Assembly?> GetAssembly(string assemblyPath)
     {
@@ -94,6 +94,12 @@ internal static class AssemblyUtils
             {
                 var frameworkDirectory = @$"{DotnetDirectory}\shared\{frameworkName}";
 
+                if(!Directory.Exists(frameworkDirectory))
+                {
+                    Log.Information($"The {frameworkName} framework was not found in path {frameworkDirectory}");
+                    continue;
+                }
+
                 var dirVersions = Directory.EnumerateDirectories(frameworkDirectory).Select(x => x.Replace(frameworkDirectory, "").Replace("\\", ""));
 
                 foreach(var (majorMinor, patch) in versions)
@@ -124,8 +130,7 @@ internal static class AssemblyUtils
                     catch(Exception ex)
                     {
                         Log.Warning($"Failed to load assembly from {potentialPath}.", ex);
-                        throw;
-                        return null;
+                        continue;
                     }
                 }
             }
