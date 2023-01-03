@@ -33,7 +33,7 @@ public class TheTest
     public async Task GenerateFilesToSave_ForSimpleWebApi_ShouldGenerateExpectedClassess()
     {
         var path = "/usr/share/dotnet/shared/Microsoft.AspNetCore.App/6.0.12/Microsoft.AspNetCore.Mvc.Core.dll";
-        var asembly = Assembly.Load(path);
+        var asembly = Assembly.LoadFile(path);
 
         Assert.NotNull(asembly);
     }
