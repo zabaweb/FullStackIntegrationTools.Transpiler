@@ -39,6 +39,11 @@ public class LoadingAssembliesVerification
 
         Assert.True(File.Exists(mvcCoreFilePath));
 
-        Assembly.LoadFrom(mvcCoreFilePath);
+        var assembly = Assembly.LoadFrom(mvcCoreFilePath);
+
+        Assert.NotNull(assembly);
+        var assemblyName = assembly.GetName();
+
+        Assert.Equal("Microsoft.AspNetCore.Mvc.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60", assemblyName.FullName);
     }
 }
