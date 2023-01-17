@@ -5,7 +5,7 @@ using NuGet.Configuration;
 using Serilog;
 
 namespace Transpiler.Helpers;
-internal static class AssemblyUtils
+public static class AssemblyUtils
 {
     public static string? RootAssemblyDirectory;
     public static string RuntimeFilePattern = "*.runtimeconfig.json";
@@ -88,7 +88,7 @@ internal static class AssemblyUtils
     }
 
 
-    private static Assembly? GetFromFrameworks(ResolveEventArgs args)
+    public static Assembly? GetFromFrameworks(ResolveEventArgs args)
     {
         // https://natemcmaster.com/blog/2017/12/21/netcore-primitives/
         var assemblyName = new AssemblyName(args.Name);
