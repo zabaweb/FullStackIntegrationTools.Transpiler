@@ -4,6 +4,7 @@ namespace EnvironmentVerification;
 
 public class LoadingAssembliesVerification
 {
+
     [Fact]
     public void LoadMicrosoftAspNetCoreMvcCore()
     {
@@ -45,5 +46,14 @@ public class LoadingAssembliesVerification
         var assemblyName = assembly.GetName();
 
         Assert.Equal("Microsoft.AspNetCore.Mvc.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60", assemblyName.FullName);
+        Assembly.Load("Microsoft.AspNetCore.Mvc.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60");
     }
+
+    public void CheckForPathRead()
+    {
+
+        byte[] fileBytes = File.ReadAllBytes(inputFilename);
+
+    }
+
 }
