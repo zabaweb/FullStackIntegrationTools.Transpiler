@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Transpiler": {
+      "commandName": "Project",
+      "commandLineArgs": "-a C:\\git\\onboarding-myaccount\\Websites\\MyAccountPortal\\ClientAccountManagementApi\\src\\ClientAccountManagement.QuickForms.Contracts\\bin\\Debug\\netstandard2.0\\ClientAccountManagement.QuickForms.Contracts.dll"
+    }
+  }
+}

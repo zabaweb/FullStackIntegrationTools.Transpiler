@@ -12,4 +12,7 @@ public class Config
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     [Option('o', "output", Required = false, HelpText = "Output directory")]
     public string OutputPath { get; set; } = "./";
+
+    [Option('s', "extraction-strategy", Required = false, HelpText = "Extraction startegy (AllTypes, Api")]
+    public ExtractionStrategy ExtractionStrategy { get; set; } = ExtractionStrategy.AllTypes;
 }
