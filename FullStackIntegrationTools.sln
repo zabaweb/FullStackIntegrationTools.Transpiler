@@ -21,12 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectWithAssemblyDependen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnvironmentVerification", "EnvironmentVerification\EnvironmentVerification.csproj", "{3DB22E09-2DB9-46FB-941A-26B2079AA91D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E783C85A-F725-423F-A3BF-A9C9C34911AA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F0EF01B2-C11D-4F95-86DF-C10C1B483350}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14A20874-FCA9-41BA-9BD7-95EB3C375C3E}"
 	ProjectSection(SolutionItems) = preProject
-		test.yml = test.yml
-		publish.yml = publish.yml
+		.github\workflows\publish.yml = .github\workflows\publish.yml
+		.github\workflows\test.yml = .github\workflows\test.yml
 	EndProjectSection
 EndProject
 Global
@@ -76,7 +74,6 @@ Global
 		{0373507B-8323-4048-B4E4-67DD002E3603} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
 		{9473722E-9139-4429-9FAF-5471A9D86E08} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
 		{D37097AE-C1C6-4FAC-8D27-18DC77228DB5} = {DB17888D-6B50-46DE-82F8-3A8CA142BE7C}
-		{F0EF01B2-C11D-4F95-86DF-C10C1B483350} = {E783C85A-F725-423F-A3BF-A9C9C34911AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C6A6C77-2FC7-471E-BF1B-D7ED06E3E215}
