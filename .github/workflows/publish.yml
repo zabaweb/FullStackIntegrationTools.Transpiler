@@ -36,4 +36,4 @@ jobs:
         run: >
           dotnet nuget push PackageUtils.${{ github.ref_name }}.nupkg 
           -s https://nuget.pkg.github.com/zabaweb/index.json 
-          -k ${{ secrets.NUGET_AUTH_TOKEN }}
+          -k ${{ secrets.NUGET_PUBLISH_TRANSPILER_KEY }}
