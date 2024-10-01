@@ -5,7 +5,6 @@ namespace TranspilerIntegrationTests;
 
 public class TheTest
 {
-
     [Fact]
     public async Task GenerateFilesToSave_ForSimpleWebApi_ShouldGenerateExpectedClasses()
     {
