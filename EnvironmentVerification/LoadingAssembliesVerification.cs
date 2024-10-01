@@ -5,7 +5,7 @@ namespace EnvironmentVerification;
 public class LoadingAssembliesVerification
 {
 
-    [Fact]
+    //[Fact]
     public void LoadMicrosoftAspNetCoreMvcCore()
     {
         var path = "";

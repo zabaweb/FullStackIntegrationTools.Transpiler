@@ -23,7 +23,8 @@ public class TheTest
         {
             AssemblyPath = assemblyPath,
             OutputPath = outputPath,
-            Verbose = true
+            Verbose = true,
+            ExtractionStrategy = ExtractionStrategy.Api
         };
         await procesor.Run(config);
         Directory.Delete(outputPath, recursive: true);
