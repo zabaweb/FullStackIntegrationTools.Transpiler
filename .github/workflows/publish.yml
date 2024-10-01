@@ -6,6 +6,7 @@ on:
       - '*.*.*'
       - '*.*.*-[a-zA-Z].*'
 
+  workflow_dispatch:
 jobs:
   build:
     name: Build Package
