@@ -1,0 +1,39 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+      - '*.*.*-[a-zA-Z].*'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Build
+        run: dotnet build --configuration Release
+            
+      - name: Test
+        run: dotnet test --configuration Release --no-build
+        
+      - name: Package
+        run: >
+          dotnet pack Transpiler --no-restore --no-build --configuration Release 
+          -p:PackageVersion=${{ github.ref_name }} --output .
+        
+      - name: Publish
+        run: >
+          dotnet nuget push FullStackIntegrationTools.Transpiler.${{ github.ref_name }}.nupkg 
+          -s https://nuget.pkg.github.com/zabaweb/index.json 
+          -k ${{ secrets.NUGET_PUBLISH_TRANSPILER_KEY }}

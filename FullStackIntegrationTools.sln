@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranspilerUnitTests", "Tran
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectWithAssemblyDependency", "ProjectWithAssemblyDependency\ProjectWithAssemblyDependency.csproj", "{D37097AE-C1C6-4FAC-8D27-18DC77228DB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvironmentVerification", "EnvironmentVerification\EnvironmentVerification.csproj", "{3DB22E09-2DB9-46FB-941A-26B2079AA91D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnvironmentVerification", "EnvironmentVerification\EnvironmentVerification.csproj", "{3DB22E09-2DB9-46FB-941A-26B2079AA91D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,6 +15,11 @@ public class NaiveParser
            .Select(x => Unpack(x).type)
            .ToList();
 
+        return Parse(typesToParse);
+    }
+
+    public TypeModel[] Parse(List<Type> typesToParse)
+    {
         var paresdTypes = new Dictionary<string, TypeModel>();
         for(int tIndex = 0; tIndex < typesToParse.Count; tIndex++)
         {

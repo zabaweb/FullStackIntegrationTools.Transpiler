@@ -12,24 +12,16 @@ public class RuntimeProcessor
 
         var assembly = await AssemblyUtils.GetAssembly(config.AssemblyPath);
 
-        var extractor = new NaiveAssemblyEndpointsExtractor();
-        var endpoints = extractor.GetEndpoints(assembly);
 
-        Console.WriteLine($"{endpoints.Length} endpoints found: {string.Join(", ", endpoints.Select(ToLogString))}");
-
-        var parser = new NaiveParser();
-        var types = parser.Parse(endpoints);
+        var typesExtractor = new TypeExtractor();
+        var types = typesExtractor.ExtractTypes(assembly, config);
+  
         Console.WriteLine($"{types.Length} types found: {String.Join(", ", types.Select(x => x.FullName))}");
 
         var generator = new TsFilesGenerator(config.OutputPath);
         await generator.Save(types);
 
         Log.Information("Saved files");
-
-        static string ToLogString(EndpointModel x)
-        {
-            return $"{x.Name}[{string.Join(", ", x.Methods.Select(m => m.MethodName))}]";
-        }
     }
 }
 
